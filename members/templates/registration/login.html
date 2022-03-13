@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} Login{% endblock title %}
+
+{% block content %}
+<style>
+          .form-group{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 10%;
+          }
+          form{
+                    width: 50%;
+                    border: 1px solid grey;
+                    border-radius: 10px;
+                    padding-bottom: 20px;
+          }
+          .form-input{
+                    margin: 15px 45px;
+          }
+          .form-input input{
+                    margin: 0px 15px;
+          }
+          .header{
+                    padding: 15px 15px;
+                    color: wheat;
+                    font-size: 25px;
+                    font-family: 'poppins', sans-serif;
+                    border-top-right-radius: 10px;
+                    border-top-left-radius: 10px;
+          }
+          label{
+                    color: white;
+                    margin-bottom: 8px;
+          }
+          button{
+                    float: right;
+                    margin-right: 30px;
+                    border: none;
+                    padding: 6px 12px;
+                    background-color: blanchedalmond;
+                    border-radius: 4px;
+          }
+</style>
+{% if request.user.is_authenticated %}
+<label>You are already Logged in  <a href="{% url 'home' %}" class="link-warning">Go Back</a>
+</label>
+{% else %}
+<div class="form-group">
+            <form action="" method="post" class="shadow-sm">
+                      <div class="header btn-secondary">LOGIN..</div>
+                        {% csrf_token %}
+                        <div class="form-input">
+                                        <label for="username">Username</label>
+                                        <input type="text" name="username" class="form-control sm" />
+                       </div>
+
+                       <div class="form-input">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" class="form-control sm" />
+                        </div>
+                        <button>Login</button>
+            </form>
+</div>
+{% endif %}
+{% endblock content %}

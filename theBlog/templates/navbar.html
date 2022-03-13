@@ -1,0 +1,118 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/all.min.css' %}" >
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+<style>
+	 .nav-link{
+             margin-right: 15px;
+             border-radius: 8px;
+             color: white;
+             cursor: pointer;
+	   padding: 6px;
+ }
+	 .nav-link:hover{
+              background-color: rgb(110, 79, 79);
+              color: white;
+  }
+	.bg-nav{
+		background-image: linear-gradient(to right, #37474F, #6a717563);
+		border-radius: 10px;
+	}
+	.navbar-brand h3{
+		color: rgb(126, 117, 141);
+		font-weight: 600;
+		font-size: 35px;
+	}
+	.btn2{
+		margin: 10px 5px;
+	}
+	 .menu{
+		margin-right: 10%;
+		border-radius:10px;
+	}
+	.search-box{
+		width: 500px;
+	}
+	.search-box form input{
+		width: 100%;
+		box-shadow:inset 2px 3px 7px grey;
+		padding: 4px;
+		border-radius:7px;
+		border: none;
+		color: white;
+		outline: none;
+	}
+	.search-box form input:focus{
+		background-color: #37474F;
+		box-shadow: 1px 1px 7px greenyellow;
+	}
+</style>
+
+<nav class="navbar navbar-expand-lg  bg-nav">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{% url 'home' %}">
+					<h3>callSTACK</h3>
+				</a>
+				{% if bob != home %}
+				<div class="search-box">
+					<form action="" method="get">
+						<input type="text" name='q' placeholder="eg post-title, category Enter your search....." autocomplete="off" />
+					</form>
+					
+				</div>
+				{% endif %}
+				<ul class="nav">
+					{% if user.is_authenticated %}
+					<div class="dropdown">
+						<li
+							class="btn btn-success dropdown-toggle nav-link"
+							id="dropdownMenuButton2"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							{{user.username}}
+						</li>
+						<ul class="dropdown-menu menu" aria-labelledby="dropdownMenuButton1">		
+							<small><a href="{% url 'user-profile' user.id %}"><li class="nav-link btn-info btn2">Profile</li></a></small>
+							<a href="{% url 'logout' %}"><li class="nav-link btn-danger btn2">logout</li></a>
+						</ul>						 
+					</div>				
+					<div class="dropdown">
+						{% if bob != home %}
+						<li
+							class="btn btn-success dropdown-toggle nav-link"
+							id="dropdownMenuButton1"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Categories
+						</li>{% endif %}
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<a href="{% url 'home' %}" ><li>ALL</a>	
+								<span class="badge bg-secondary">{{count_post}}</span></li>	
+							{% for item in Categories_list %}		
+								<a href="{% url 'home' %}?q={{item.name}}" ><li li class="dropdown-item">{{item.name}}</a>
+								<span class="badge bg-secondary">{{item.post_count}}</span></li>
+							{% endfor %}
+							 <!-- {% for item in Categories_list %}
+                                                                                     <a href=""><li class="dropdown-item"> {{ item.name }}</li></a>
+                                                                                     {% endfor %}
+							<a href="{% url 'add-category' %}"><li class="newCategory dropdown-item"> Create New Category </li></a> -->
+						</ul>						 
+					</div>					
+					<a href="{% url 'add-post' %}"><li class="nav-link btn-success"><i class="fas fa-plus-circle"></i>Add Posts</li></a> 
+					{% else %}
+                                                            <a href="{% url 'register-user' %}"><li class="nav-link btn-info">Sign-up</li></a>
+					           <a href="{% url 'login' %}"><li class="nav-link btn-info">Login</li></a>			
+					{% endif %}
+
+				</ul>
+			</div>
+		</nav>
+
+		
+
+                      
+                         <script src="{% static 'js/bootstrap.min.js' %}"></script>
+                        <script src="{% static 'js/jquery.min.js' %}"></script>

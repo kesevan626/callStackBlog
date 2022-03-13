@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}  {{post.title}} {% endblock title %}
+{% block content %}
+
+  {% load static %}
+          <link rel="stylesheet" href="{% static 'css/articleDetail.css' %}">
+
+<div class="container bg-light">
+                    <div class="title-box">
+                              <a href="{% url 'home' %}" class="link-warning"><- Go-home</a>
+                              <h2> {{ post }} <small class="author">&copy <a href="{% url 'user-profile' post.author.pk %}">{{post.author}}</a> </small></h2> 
+                                       
+                                          <p class="card-text"><small class="text-muted">Created {{post.created}}</small>{% if post.updated|timesince > '1' %}
+                              <small class="text-muted">--- Updated: {{post.updated | timesince }} ago</small>{% endif %}
+                               </p>            
+                    </div><br>
+                    {% if post.postImage == "" %}
+                        <div class="image-div bg-secondary" >
+                                <h4>NO IMAGE</h4>
+                         </div>
+                    {% else %}
+                    <div class="image-div">
+                              <img src="{{ post.get_photo_url.url }}"
+                                        class="card-img-top" alt="...">
+                    </div><hr>
+                    {% endif %}
+                     
+                         <small class="text-muted">Category: <code>{{post.category}}</code></small>
+                          {% if request.user == post.author %}
+                                                <div class="crud">
+                                                                <small><a href="{% url 'Update-post' post.pk %}" class="link-info">Edit</a></small>
+                                                                <a href="{% url 'delete-post' post.pk%}"><button class="btn-danger">Delete</button></a>
+                                                </div><br>
+                        {% endif %}<hr>                    
+                    <div class="post-body">    
+                        <p>{{post.body}}</p>
+                    </div><br><br><hr>
+{% if request.user.is_authenticated %}
+                    <div class="comment-input">
+                              <form method="POST">
+                                   {% csrf_token %}
+                                       <div class="form-floating">
+                                                  <input type="text" class="form-control" name="body" placeholder="Leave a comment here" id="floatingTextarea" placeholder='Write your comment' autocomplete="off" />
+                                                    <label for="floatingTextarea">Comments</label>
+                                        </div>
+                              </form>
+                    </div>
+{% else %}
+                    <label for="floatingTextarea">Leave your Comments</label>
+                     <input type="text" class="form-control" name="body" placeholder="comment disabled Login to comment" id="floatingTextarea" disabled placeholder='Write your comment' autocomplete="off" />
+                    {% endif %}
+
+
+                    <div class="comment-section">
+                              <h4 class="bg-nav shadow-sm comment-header">Comments..</h4>
+                                        {% for chat in post.comment_set.all %}    
+                                                  {%if request.user == chat.user %}            
+                                                            <div class="card" style="border-left: 1px solid gray;  border-radius: 3px; text-align: right">
+                                                                 <li>{{chat}}                                                          
+                                                                   {% if request.user == chat.user %}
+                                                                            <div class="crud">
+                                                                                  {% if chat.created|timesince < '1' %}
+                                                                                          <small><a href="{% url 'home' %}" class="link-info">Edit</a></small>
+                                                                                    {% endif %}
+                                                                                          <small><a href="{% url 'delete-message' chat.pk %}"><button class="btn-danger">Delete</button></a></small> 
+                                                                              </div>                                  
+                                                                    {% endif %}</li>     
+                                                                       <small class="text-muted">Sent: {{chat.created | timesince}} ago</small>
+                                                             </div>  
+                                                  {% else %}
+                                                              <div class="card" style="border-right: 1px solid rgb(46, 36, 36);  border-radius: 3px; ;">
+                                                                 <li>{{chat}}                                                          
+                                                                   {% if request.user == chat.user %}
+                                                                            <div class="crud">
+                                                                                         
+                                                                                          <small><a href="{% url 'home' %}" class="link-info">Edit</a></small>
+                                                                                         
+                                                                                          <small><a href="{% url 'home'  %}"><button class="btn-danger">Delete</button></a></small> 
+                                                                              </div>                                  
+                                                                    {% endif %}</li>     
+                                                                       <small class="text-muted">@{{ chat.user}}  {{chat.created | timesince}} ago</small>
+                                                             </div>  
+                                                   {% endif %}</li>                                            
+                                          {% endfor %}
+                    </div>
+</div>
+
+
+
+{% endblock content %}
+<!-- style="width: 600px; height: 400px; object-fit: cover; display: flex; justify-content: center; align-items: center;" -->

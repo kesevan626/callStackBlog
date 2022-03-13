@@ -1,0 +1,97 @@
+
+	.room-section{
+		color: white;
+	}
+	.container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 20px;
+	}
+	.create-btn {
+		border: none;
+		outline: none;
+		border-radius: 5px;
+		font-size: 14px;
+		padding: 3px 3px;
+		font-family: "Bradley Hand ITC", sans-serif;
+	}
+	.join-flex {
+		display: flex;
+		justify-content: center;
+	}
+	.join {
+		width: 80%;
+	}
+	.box{
+		padding: 5px 15px;
+	}
+	.list-group-item{
+		margin: 0px 0px;
+		border-radius: 5px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.search{
+		width: 460px;
+		position: relative;
+	}
+	.search input{
+		padding: 6px;	
+		border: 1px solid rgba(128, 128, 128, 0.336);
+		border-radius: 5px;
+		width: 100%;
+		outline: none;
+		background-color:#6a6d6e;
+		color: white;
+	}
+	.search input::placeholder{
+		color: white;
+	}
+	.create-btn{
+		position: absolute;
+		right: 0;
+		height: 38px;
+		padding: 0px 12px;
+		color: white;
+	}
+	.create-btn:hover{
+		background-color: rgba(131, 94, 0, 0.966);
+		color: white;
+	}
+	.btn-delete {
+		margin-top: 20px;
+		float: right;
+		background-color:red;
+		color: white;
+		font-size: 12px;
+		width: 60px;
+		border-radius: 6px;
+		border: none;
+		padding: 6px 0px;
+	}
+	.btn-delete a{
+		color: white;
+		padding: 0px 10px;
+	}
+	.msg{
+		color: white;
+		position: absolute;
+		top: 30px;
+		left: 50px;
+		background-color: rgba(73, 88, 49, 0.671);
+	}
+	.messages{
+		margin: 15px 30px;
+	}
+	.messages li{
+		list-style-type: none;
+	}
+	.messages .error{
+		padding: 7px 10px;
+	}
+	.messages h6{
+		margin: 20px 10px;
+		background-color:white;
+	}

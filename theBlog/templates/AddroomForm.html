@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+<link rel="stylesheet" href="{% static 'css/addpost.css' %}" />
+
+{% block content %}
+<style>
+	.form-group{
+            padding: 0px 50px;
+}
+	.addpost-flex{
+		display: flex;
+		justify-content: center;
+	}
+	label{
+		color: antiquewhite;
+	}
+	.addpost{
+		width: 70%;
+		padding: 15px 25px;
+		margin-top: 10px;
+		border-radius: 10px;
+	}
+</style>
+<div class="addpost-flex ">
+	<div class="addpost  bg-secondary">
+		<h3 style="color: wheat;">Create Room</h3>
+		<div class="form-group">
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %} 
+				{{form.as_p}}
+				<input type="submit" class="btn-dark" value="Submit" />
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

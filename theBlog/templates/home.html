@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+ {% block content %}
+ {% load static %}
+<link rel="stylesheet" href="{% static 'css/homes.css' %}" >
+
+
+{% if request.user.is_authenticated %}
+<div class="notification ">
+	<div class="mum">
+	<div class="user-box p-2 mb-2  rounded bg-noti">
+		<div class="user-profile">
+			<div class="user-title">
+				<h6>Notifications</h6>
+			</div>
+			<button type="button" class="btn btn-success position-relative">
+				<span
+					class="position-absolute top-0 start-100 translate-middle p-1 badge bg-success border border-light rounded-circle">
+					<span class="visually-visible"></span>
+				</span>
+			</button>
+		</div>
+	</div>
+	</div>
+</div>
+{% endif %}
+
+	<div class="container-box">
+
+		<div class="left-container">
+			<div class="header">Room</div>
+			<div class="">
+				<a href="{% url 'add-room' %}"><button class="btn-danger">Create Room</button></a>
+				{% for room in room %}
+					<a href="{% url 'room-page' room.pk room.name %}"><li class=" room">{{room}}</li></a>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class=" middle-container ">
+			<h6 class="header" ><span class='text-muted'>{{page.count}}  </span> POST</h6>
+			{% for post in page %}
+				<div class="body-div">	
+									
+									<h5 class="card-title"><a href="{% url 'Detail-View' post.id %}">{{ post.title }}</a></h5> <br>
+									<small>&copy {{post.author}}</small>
+									<p class="card-text">{{post.body|slice:20|safe}}...<a href="{% url 'Detail-View' post.id%}">Read-More</a></p>
+									<p class="card-text"><small class="text-muted">Created {{post.created}}</small>{% if post.updated|timesince >  '1' %}
+									 <small>--- Updated: {{post.updated | timesince }}  ago</small>{% endif %}</p>
+									<small>Category: <code>{{post.category}}</code></small>
+									
+									<!-- <div class="crud">
+										{% if request.user == post.author %}
+											<small><a href="{% url 'Update-post' post.pk %}" class="link-info">Edit</a></small>
+											<a href="{% url 'delete-post' post.pk%}"><button class="btn-danger">Delete</button></a>
+										{% endif %}
+									</div>	 -->
+				</div>	
+				
+				{% endfor %}
+				{% if page.count == 0 %}
+					<a href="{% url 'add-post' %}"><button class="btn-danger">Create Post</button></a>
+				{% endif %}
+				{% if page.has_previous %}
+				<a href="{% url 'home' %}?page={{page.previous_page_number}}" ><button style="padding: 7px 25px; margin-left: 20px;">Prev</button></a>
+				{% endif %}
+				{% if page.has_next %}
+				<a href="{% url 'home' %}?page={{page.next_page_number}}" ><button style="padding: 7px 25px; margin-left: 40px;">Next</button></a>
+				{% endif %}
+		</div>
+
+		<!-- <div class="right-container">
+				<div class="category-box">			
+						<h3 class='header'>Categories</h3>	
+								<a href="{% url 'home' %}" style="color: whitesmoke;"><li>ALL</a>	
+								<span class="badge bg-secondary">{{count_post}}</span></li>	
+							{% for item in Categories_list %}		
+								<a href="{% url 'home' %}?q={{item.name}}" style="color: whitesmoke;"><li>{{item.name}}</a>
+								<span class="badge bg-secondary">{{item.post_count}}</span></li>
+							{% endfor %}
+				</div>
+		</div>	 -->
+
+	</div>	
+
+	
+
+{% endblock content %}

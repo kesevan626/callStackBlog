@@ -1,0 +1,58 @@
+
+          .form-group{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+          }
+          form{
+                    width: 50%;
+                    border: 1px solid grey;
+                    border-radius: 10px;
+                    padding-bottom: 20px;
+                    background: transparent;
+                    backdrop-filter: blur(80px);
+                    background-color: #263238;
+                    position:fixed;
+          }
+          .form-input{
+                    margin: 15px 45px;
+          }
+          .form-input input{
+                    margin: 0px 15px;
+                    font-family: 'poppins', sans-serif;
+          }
+          .header{
+                    padding: 15px 15px;
+                    color: wheat;
+                    font-size: 25px;
+                    font-family: 'poppins', sans-serif;
+                    border-top-right-radius: 10px;
+                    border-top-left-radius: 10px;
+          }
+          label{
+                    margin-bottom: 8px;
+                    color: whitesmoke;
+          }
+          button{
+                    float: right;
+                    margin-right: 30px;
+                    border: none;
+                    padding: 6px 12px;
+                    background-color: blanchedalmond;
+                    border-radius: 4px;
+                  
+          }
+          .error-div{
+            position: absolute;
+            top:0;
+           
+          }
+          .btn:hover{
+                  color: whitesmoke;
+          }
+        
+          .edit{
+            list-style-type: none;
+               color: red;
+              
+          }

@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %}
+ {% load static %}
+<link rel="stylesheet" href="{% static 'css/room_page.css' %}" />
+
+
+<div class="msg">
+ {% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<li class="error">{{ message }}</li>
+					<!-- <p>{{success}}</p> -->
+				{% endfor %}
+			</ul>
+{% endif %}
+</div>
+<div class="room-section ">
+	<a href="{% url 'home' %}" class="link-warning"><- Go-home</a>
+	<div class="container ">
+		<h3>{{room.name}}
+			<div class="text-muted">
+				<h6>   Creator: 
+					{% if room.creator == "" %}
+					<span>Admin</span></h6>
+					{% else %}
+					<span>{{room.creator }}</span></h6>
+					{% endif %}
+			</div>
+		</h3>
+		<div class="search">
+			{% if request.user.is_authenticated %}
+			<form action="" method="POST">
+				{% csrf_token %}
+				<input type="text" name="title" id="" placeholder="Create Topic" required >
+				<button class="btn-warning create-btn"><strong>+</strong></button>
+			</form>
+			{% else %}
+				<input type="text" name="title" id="" placeholder="Create Topic" disabled >
+				<button onclick="log();" class="btn-warning create-btn"><strong>+</strong></button>
+			{% endif %}
+			
+		</div>
+	</div>
+	<div class="join-flex">
+		<div class="join">
+			Join in the Conversation on this topics	
+			{% if room.creator == request.user %}
+			<a href="{% url 'delete-room' room.pk%}"><button class="btn-delete">Delete</button></a>	
+			{% endif %}		
+			<div class="box">
+				<code>Note :</code> Anybody can create a topic, but the room creator can delete the Topic
+				{% for topic in room_topic%}
+					<div class="container">
+							 <a href="{% url 'topic-page' topic.pk%}" class="list-group-item list-group-item-action list-group-item-dark" style=" color:#263238; size: 18px;">{{topic}} 
+								 {% if request.user == room.creator %}
+								 <a href="{% url 'delete-topic' topic.pk%}"><span style=" border-radius: 5px; padding: 0px 5px; color: white; background-color:rgb(202, 68, 68);">X</a></span></a>	
+								 {% else %}
+								 <span style=" border-radius: 5px; padding: 0px 5px; color: white; background-color:rgb(202, 68, 68);"></span></a>
+								 {% endif %}			 
+					</div>		
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function log(){
+		alert('You have to login to create a Topic')
+	}
+</script>
+{% endblock %}

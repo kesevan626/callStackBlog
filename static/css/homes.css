@@ -1,0 +1,82 @@
+.header{
+  background-color: burlywood;
+  border-radius: 4px;
+  color: white;
+  padding: 3px 8px;
+  margin: 15px;
+  font-size: 20px;
+}
+.body-div{
+  padding: 30px 20px;
+}
+.right-container li{
+  list-style-type: none;
+  margin: 10px 8px;
+  background-color: rgba(240, 248, 255, 0.432);
+  padding: 3px 5px;
+  width: 200px;
+}
+.crud{
+          display: inline-block;
+}
+button{
+            font-size: 12px;
+            font-family: 'poppins', sans-serif;
+            border: none;
+            border-radius: 4px ;
+            padding: 3px 5px;
+            color: blueviolet;
+}
+	.notification{
+		color: white;
+		
+	}
+	.container-box{
+         		 display: flex;
+		 margin: 15px;
+		backdrop-filter: blur(4px);
+}
+	.middle-container{
+		padding-left: 15px;
+		flex: 3;	
+	}
+	.left-container{
+		padding: 10px 25px;
+		text-align: left;
+		flex: 1;
+	}
+	.right-container{
+		color: white;
+    padding: 0px 20px;
+		flex: 1;
+	}
+	.room{
+		font-size: 14px;
+		list-style-type: none;
+		color: white;
+		background-color: rgba(128, 128, 128, 0.596);
+		margin-top: 10px;
+		width: 180px;
+		padding: 5px 8px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	a{
+		text-decoration: none;
+	}
+	.body-div{
+		margin: 10px 0px;
+		border-radius: 10px;
+		background-image: linear-gradient(to left, rgba(131, 123, 123, 0.493)  ,#212121b6 );
+		backdrop-filter: blur(40px);
+	}
+	.body-div p,small{
+		color: whitesmoke;
+	}
+	.bg-noti{
+		background-color: #293941;
+		backdrop-filter: blur(40px);
+		margin: 15px 10px;
+		box-shadow: inset 2px 2px 20px #37454b
+					2px 2px 20px grey;
+	}

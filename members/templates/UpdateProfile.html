@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} update-profile{% endblock title %}
+
+{% block content %}
+<style>
+          .header{
+                    padding: 8px 10px;
+          }
+       .form-group{
+                 background-color: wheat;
+                  display: flex;
+                  justify-content: center;    
+       }
+       form{
+                 width: 70%;
+                 padding: 20px 30px;
+       }
+</style>
+<div class="form-group">
+            <form action="" method="POST" class="shadow-sm bg-light">
+                      <div class="header btn-secondary">Update Profile</div>
+                        {% csrf_token %}
+                        <!-- <label for="">First-Name</label>
+                        {{ user_form.firstname }} -->
+                        {{form.as_p}}
+                        <button>Submit</button>
+            </form>
+</div>
+{% endblock content %}

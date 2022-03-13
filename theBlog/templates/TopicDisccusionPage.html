@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+ <style>
+           .cop{
+                     color: aliceblue;
+           }
+ </style>
+<div class="msg">
+ {% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<li class="error">{{ message }}</li>
+				{% endfor %}
+			</ul>
+{% endif %}
+</div>
+<div class="cop">
+          {{topic.title}}
+</div>
+{% endblock %}

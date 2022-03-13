@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Profile</title>
+         {% load static %}
+          <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+       <div class="top-profile bg-light">
+                          <div class="profile-image">
+                                <div class="profile">
+                                      <img src="{% static 'images/Profile-image/profile.png' %}" alt="" srcset="">
+                                </div>
+                          </div>
+                              <h5>{{user.username}}</h5>
+                              <a href="{% url 'update-profile' %}"><button class="btn-secondary edit-profile">Edit-Profile</button></a>
+                              <h6>{{user.date_joined}} | {{user.date_joined|timesince}}</h6>
+                    </div>
+          <div class="container ">
+
+                    <div class="">
+                          <h4>Room Created</h4>
+                               {% for room in user_room %}
+                                       <li> {{room}}</li>
+                              {% endfor %}
+                             
+                    </div>
+                   <div class="middle">
+                         <h5>Recent Activities</h5>
+                   </div>
+                    <div class="left">
+                          <h4>Post Created</h4>
+                                 {% for post in user_post%}
+                                       <li><a href="{% url 'Detail-View' post.id%}">{{post}}</a> ---<span class="text-muted">{{post.created}}</span></li>
+                              {% endfor %}
+                    </div>
+
+          </div>
+          {% load static %}
+          <link rel="stylesheet" href="{% static 'css/userprofile.css' %}">
+</body>
+</html>
+ 
